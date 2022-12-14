@@ -1,0 +1,23 @@
+{
+  "name": "landing-page-prototype",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kgni/mvst-landingpage-3d-prototype.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kgni/mvst-landingpage-3d-prototype/issues"
+  },
+  "homepage": "https://github.com/kgni/mvst-landingpage-3d-prototype#readme",
+  "dependencies": {
+    "gsap": "^3.11.3"
+  }
+}
