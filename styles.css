@@ -22,9 +22,13 @@ ul {
 	align-items: center;
 }
 
-li {
+nav li {
 	display: flex;
 	align-items: center;
+	cursor: pointer;
+}
+
+nav svg {
 	cursor: pointer;
 }
 
@@ -37,4 +41,5 @@ nav button {
 	padding: 0.5rem 2rem;
 	border-radius: 100000px;
 	font-size: 1.4rem;
+	cursor: pointer;
 }
