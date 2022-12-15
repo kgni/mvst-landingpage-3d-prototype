@@ -176,7 +176,7 @@ setTimeout(() => {
     // ease: "power1.inOut",
     scrollTrigger: {
       trigger: ".section-2",
-      scrub: 2,
+      scrub: true,
     },
     toggleActions: "play pause resume reset",
   });
@@ -186,7 +186,7 @@ setTimeout(() => {
     ease: "power1.inOut",
     scrollTrigger: {
       trigger: ".section-3",
-      scrub: 2,
+      scrub: true,
     },
   });
 
@@ -204,7 +204,7 @@ setTimeout(() => {
     // ease: "power1.inOut",
     scrollTrigger: {
       trigger: ".section-3",
-      scrub: 2,
+      scrub: true,
       endTrigger: ".section-4",
     },
   });
@@ -214,7 +214,16 @@ setTimeout(() => {
     // ease: "power1.inOut",
     scrollTrigger: {
       trigger: ".section-4",
-      scrub: 2,
+      scrub: true,
+    },
+  });
+
+  tl.to(laptop.rotation, {
+    y: Math.PI * 2.5,
+    // ease: "power1.inOut",
+    scrollTrigger: {
+      trigger: ".section-4",
+      scrub: true,
     },
   });
 
