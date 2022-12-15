@@ -1,15 +1,11 @@
 import "./style.css";
 import * as THREE from "three";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
-import * as dat from "lil-gui";
 import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry.js";
 import { FontLoader } from "three/examples/jsm/loaders/FontLoader.js";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { TimelineMax } from "gsap";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 gsap.registerPlugin(ScrollTrigger);
-
-const objectsDistance = 2;
 
 /**
  * Fonts
@@ -52,6 +48,48 @@ fontLoader.load("/fonts/Bitter_Regular.json", (font) => {
   textGeometry.rotateX(Math.PI / 2);
   scene.add(text);
 });
+
+/**
+ * Models
+ */
+const gltfLoader = new GLTFLoader();
+
+let phone, laptop;
+
+gltfLoader.load("/models/iphone2/scene(2).glb", (gltf) => {
+  phone = gltf.scene;
+  phone.position.x = 13;
+  phone.position.y = 0;
+  phone.position.z = -1;
+  scene.add(phone);
+});
+
+gltfLoader.load("/models/laptop.glb", (gltf) => {
+  laptop = gltf.scene;
+  laptop.position.x = 18;
+  laptop.position.y = -0.5;
+  laptop.position.z = -5;
+  laptop.rotateY(-Math.PI / 3);
+  laptop.rotateX(Math.PI / 7);
+  scene.add(laptop);
+});
+
+/**
+ * Lights
+ */
+const ambientLight = new THREE.AmbientLight(0xffffff, 1);
+scene.add(ambientLight);
+
+const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+directionalLight.castShadow = true;
+directionalLight.shadow.mapSize.set(1024, 1024);
+directionalLight.shadow.camera.far = 15;
+directionalLight.shadow.camera.left = -7;
+directionalLight.shadow.camera.top = 7;
+directionalLight.shadow.camera.right = 7;
+directionalLight.shadow.camera.bottom = -7;
+directionalLight.position.set(5, 5, 5);
+scene.add(directionalLight);
 
 /**
  * Sizes
@@ -128,39 +166,65 @@ let currentSection = 0;
 let startPosition = 0;
 let endPosition = 500;
 
-window.addEventListener("scroll", () => {
-  scrollY = window.scrollY;
-  if (scrollY >= startPosition && scrollY <= endPosition) {
-    // calculate the rotation angle based on the scroll position
-    // var rotationAngle = -(scrollY - startPosition) * 0.00015; // adjust this value to control the rotation speed
-    var rotationAngle = -(Math.PI / 2) / 500;
-    // rotate the object along the x-axis
-    // console.log(scrollY);
-    // text.rotateX(rotationAngle);
-  }
+setTimeout(() => {
+  var tl = gsap.timeline();
+
   tl.to(text.rotation, {
     x: -Math.PI / 2,
     // ease: "power1.inOut",
     scrollTrigger: {
-      trigger: ".section-1",
+      trigger: ".section-2",
       scrub: 2,
-      endTrigger: ".section-3",
     },
-    toggleActions: "play none none reverse",
+    toggleActions: "play pause resume reset",
   });
 
   tl.to(text.position, {
-    x: -150,
+    y: 100,
     ease: "power1.inOut",
     scrollTrigger: {
       trigger: ".section-3",
-      scrub: 1,
+      scrub: 2,
+    },
+  });
+
+  tl.to(phone.position, {
+    x: -10,
+    // ease: "power1.inOut",
+    scrollTrigger: {
+      trigger: ".section-3",
+      scrub: 2,
       endTrigger: ".section-4",
     },
   });
-});
+  tl.to(phone.rotation, {
+    y: Math.PI * 4,
+    // ease: "power1.inOut",
+    scrollTrigger: {
+      trigger: ".section-3",
+      scrub: 2,
+      endTrigger: ".section-4",
+    },
+  });
 
-var tl = gsap.timeline();
+  tl.to(laptop.position, {
+    x: 1,
+    // ease: "power1.inOut",
+    scrollTrigger: {
+      trigger: ".section-4",
+      scrub: 2,
+    },
+  });
+
+  //   tl.to(laptop.rotation, {
+  //     x: Math.PI,
+  //     // ease: "power1.inOut",
+  //     scrollTrigger: {
+  //       trigger: ".section-4",
+  //       scrub: 2,
+  //     },
+  //   });
+}, 500);
 
 const tick = () => {
   const elapsedTime = clock.getElapsedTime();
@@ -168,20 +232,19 @@ const tick = () => {
   // Update controls
   // controls.update()
 
-  // camera.position.y = - scrollY / sizes.height * objectsDistance
+  //   camera.position.y = (-scrollY / sizes.height) * 2;
 
-  // const parallaxX = cursor.x
-  // const parallaxY = cursor.y
-  // camera.position.x = parallaxX*0.25
-  // camera.position.y = parallaxY*0.15
+  //   const parallaxX = cursor.x;
+  //   const parallaxY = cursor.y;
+  //   camera.position.x = parallaxX * 0.05;
+  //   camera.position.y = parallaxY * 0.05;
 
-  //camera.position.y = - scrollY / sizes.height
+  //   camera.position.y = -scrollY / sizes.height;
 
   //   if (scrollY > 0) camera.rotateX()
   const newSection = Math.round(scrollY / sizes.height);
   if (newSection != currentSection) {
     currentSection = newSection;
-    console.log("new");
   }
 
   // Render

@@ -63,6 +63,13 @@ nav button {
 	cursor: pointer;
 }
 
+header {
+    position: fixed;
+    background: #FFFFFF;
+    width: 100%;
+    z-index: 5;
+}
+
 .section-1
 {
     display: flex;
