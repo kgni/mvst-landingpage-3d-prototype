@@ -57,10 +57,12 @@ const gltfLoader = new GLTFLoader();
 let phone, laptop;
 
 gltfLoader.load("/models/iphone2/scene(2).glb", (gltf) => {
+  // gltfLoader.load("/models/iphone_14_pro.glb", (gltf) => {
   phone = gltf.scene;
   phone.position.x = 13;
   phone.position.y = 0;
   phone.position.z = -1;
+  //   phone.scale = new THREE.Vector3(5, 5, 5);
   scene.add(phone);
 });
 
@@ -193,7 +195,7 @@ setTimeout(() => {
     // ease: "power1.inOut",
     scrollTrigger: {
       trigger: ".section-3",
-      scrub: 2,
+      scrub: true,
       endTrigger: ".section-4",
     },
   });
