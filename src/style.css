@@ -1,26 +1,50 @@
-*
-{
-    margin: 0;
-    padding: 0;
+* {
+	margin: 0;
+	padding: 0;
+	font-family: 'Cabin', sans-serif;
 }
 
-html {
-	background: #FFFFFF;
+html,
+body {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
 }
 
-.webgl
-{
-    position: fixed;
-    top: 0;
-    left: 0;
-    outline: none;
+.webgl {
+	position: fixed;
+	top: 0;
+	left: 0;
+	outline: none;
 	z-index: -10;
 }
 
-* {
-	padding: 0;
-	margin: 0;
-	font-family: sans-serif;
+.container {
+	height: 100vh;
+	overflow-y: scroll;
+	scroll-snap-type: y mandatory;
+}
+
+.hero-section {
+	height: 100vh;
+	scroll-snap-align: start;
+}
+.panel {
+	scroll-snap-align: start;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 50;
+	height: 100vh;
+	position: relative;
+	text-transform: uppercase;
+}
+
+header {
+	/* position: fixed; */
+	background: #ffffff;
+	width: 100%;
+	z-index: 5;
 }
 
 nav {
@@ -63,78 +87,24 @@ nav button {
 	cursor: pointer;
 }
 
-header {
-    position: fixed;
-    background: #FFFFFF;
-    width: 100%;
-    z-index: 5;
+.text {
+	font-size: 2rem;
+	width: 50%;
+	/* opacity: 0; */
 }
-
-.section-1
-{
-    display: flex;
-    align-items: center;
-	justify-content: center;
-    height: 100vh;
-    position: relative;
-    font-family: 'Cabin', sans-serif;
-    text-transform: uppercase;
-    font-size: 4vmin;
-    padding-left: 10%;
-    padding-right: 10%;
-}
-
-.section-2
-{
-    display: flex;
-    align-items: center;
-	justify-content: center;
-    height: 100vh;
-    position: relative;
-    font-family: 'Cabin', sans-serif;
-    text-transform: uppercase;
-    font-size: 4vmin;
-    padding-left: 10%;
-    padding-right: 10%;
-}
-
-.section-3
-{
-    display: flex;
-    align-items: center;
-	justify-content: end;
-	right: 0;
-    height: 100vh;
-	width: 40%;
-    position: relative;
-    font-family: 'Cabin', sans-serif;
-    text-transform: uppercase;
-    font-size: 3vmin;
-    padding-left: 10%;
-    padding-right: 10%;
-}
-
-.section-4
-{
-    display: flex;
-    align-items: center;
-	justify-content: end;
-	right: 0;
-    height: 100vh;
-	width: 40%;
-    position: relative;
-    font-family: 'Cabin', sans-serif;
-    text-transform: uppercase;
-    font-size: 3vmin;
-    padding-left: 10%;
-    padding-right: 10%;
-}
-
 h3 {
-    justify-content: center;
+	margin-bottom: 1.2rem;
+	font-size: 3rem;
 }
 
-p {
-    color: #8E8E8C;
+.empty-box {
+	width: 50%;
 }
 
+.padding-box {
+	width: 70%;
+	margin: 0 auto;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
