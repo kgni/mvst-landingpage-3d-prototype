@@ -1,10 +1,10 @@
-import './style.css';
-import * as THREE from 'three';
-import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
-import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import "./style.css";
+import * as THREE from "three";
+import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry.js";
+import { FontLoader } from "three/examples/jsm/loaders/FontLoader.js";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 gsap.registerPlugin(ScrollTrigger);
 
 /**
@@ -18,37 +18,37 @@ const fontLoader = new FontLoader();
 const textureLoader = new THREE.TextureLoader();
 
 // Canvas
-const canvas = document.querySelector('canvas.webgl');
+const canvas = document.querySelector("canvas.webgl");
 
 // Scene
 const scene = new THREE.Scene();
 let text;
 
-fontLoader.load('/fonts/Bitter_Regular.json', (font) => {
-	const textGeometry = new TextGeometry('MVST.', {
-		font: font,
-		size: 1.1,
-		height: 0.2,
-		curveSegments: 12,
-		bevelEnabled: true,
-		bevelThickness: 0.02,
-		bevelSize: 0.025,
-		bevelOffset: 0,
-		bevelSegments: 5,
-	});
-	textGeometry.computeBoundingBox();
-	const matcapTexture = textureLoader.load('/textures/matcaps/9.png');
-	const textMaterial = new THREE.MeshMatcapMaterial({ matcap: matcapTexture });
-	textMaterial.transparent = true;
-	textMaterial.opacity = 1;
-	text = new THREE.Mesh(textGeometry, textMaterial);
-	textGeometry.translate(
-		-textGeometry.boundingBox.max.x * 0.48,
-		-textGeometry.boundingBox.max.y * 0.5,
-		-textGeometry.boundingBox.max.z * 0.5
-	);
-	textGeometry.rotateY(0.03);
-	scene.add(text);
+fontLoader.load("/fonts/Bitter_Regular.json", (font) => {
+  const textGeometry = new TextGeometry("MVST.", {
+    font: font,
+    size: 1.1,
+    height: 0.2,
+    curveSegments: 12,
+    bevelEnabled: true,
+    bevelThickness: 0.02,
+    bevelSize: 0.025,
+    bevelOffset: 0,
+    bevelSegments: 5,
+  });
+  textGeometry.computeBoundingBox();
+  const matcapTexture = textureLoader.load("/textures/matcaps/9.png");
+  const textMaterial = new THREE.MeshMatcapMaterial({ matcap: matcapTexture });
+  textMaterial.transparent = true;
+  textMaterial.opacity = 1;
+  text = new THREE.Mesh(textGeometry, textMaterial);
+  textGeometry.translate(
+    -textGeometry.boundingBox.max.x * 0.5,
+    -textGeometry.boundingBox.max.y * 0.5,
+    -textGeometry.boundingBox.max.z * 0.5
+  );
+  textGeometry.rotateY(0.03);
+  scene.add(text);
 });
 
 /**
@@ -58,25 +58,25 @@ const gltfLoader = new GLTFLoader();
 
 let phone, laptop;
 
-gltfLoader.load('/models/iphone2/scene(2).glb', (gltf) => {
-	// gltfLoader.load("/models/iphone_14_pro.glb", (gltf) => {
-	phone = gltf.scene;
-	phone.position.x = 10;
-	phone.position.y = 0;
-	phone.position.z = -1;
-	phone.scale.set(1.5, 1.5, 1.5);
-	scene.add(phone);
+gltfLoader.load("/models/iphone2/scene(2).glb", (gltf) => {
+  // gltfLoader.load("/models/iphone_14_pro.glb", (gltf) => {
+  phone = gltf.scene;
+  phone.position.x = 10;
+  phone.position.y = 0;
+  phone.position.z = -1;
+  phone.scale.set(1.5, 1.5, 1.5);
+  scene.add(phone);
 });
 
-gltfLoader.load('/models/laptop.glb', (gltf) => {
-	laptop = gltf.scene;
-	laptop.position.x = -18;
-	laptop.position.y = -0.5;
-	laptop.position.z = -5;
-	// laptop.rotateY(-Math.PI / 3);
-	laptop.rotateX(Math.PI * 0.125);
-	laptop.scale.set(2, 2, 1.5);
-	scene.add(laptop);
+gltfLoader.load("/models/laptop.glb", (gltf) => {
+  laptop = gltf.scene;
+  laptop.position.x = -18;
+  laptop.position.y = -0.5;
+  laptop.position.z = -5;
+  // laptop.rotateY(-Math.PI / 3);
+  laptop.rotateX(Math.PI * 0.125);
+  laptop.scale.set(2, 2, 1.5);
+  scene.add(laptop);
 });
 
 /**
@@ -100,22 +100,22 @@ scene.add(directionalLight);
  * Sizes
  */
 const sizes = {
-	width: window.innerWidth,
-	height: window.innerHeight,
+  width: window.innerWidth,
+  height: window.innerHeight,
 };
 
-window.addEventListener('resize', () => {
-	// Update sizes
-	sizes.width = window.innerWidth;
-	sizes.height = window.innerHeight;
+window.addEventListener("resize", () => {
+  // Update sizes
+  sizes.width = window.innerWidth;
+  sizes.height = window.innerHeight;
 
-	// Update camera
-	camera.aspect = sizes.width / sizes.height;
-	camera.updateProjectionMatrix();
+  // Update camera
+  camera.aspect = sizes.width / sizes.height;
+  camera.updateProjectionMatrix();
 
-	// Update renderer
-	renderer.setSize(sizes.width, sizes.height);
-	renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  // Update renderer
+  renderer.setSize(sizes.width, sizes.height);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 });
 
 /**
@@ -123,10 +123,10 @@ window.addEventListener('resize', () => {
  */
 // Base camera
 const camera = new THREE.PerspectiveCamera(
-	75,
-	sizes.width / sizes.height,
-	0.1,
-	75
+  75,
+  sizes.width / sizes.height,
+  0.1,
+  75
 );
 camera.position.x = 0;
 camera.position.y = 0;
@@ -141,8 +141,8 @@ scene.add(camera);
  * Renderer
  */
 const renderer = new THREE.WebGLRenderer({
-	canvas: canvas,
-	alpha: true,
+  canvas: canvas,
+  alpha: true,
 });
 renderer.setSize(sizes.width, sizes.height);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -153,84 +153,95 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 const clock = new THREE.Clock();
 
 const cursor = {
-	x: 0,
-	y: 0,
+  x: 0,
+  y: 0,
 };
 
-window.addEventListener('mousemove', (event) => {
-	cursor.x = event.clientX / sizes.width - 0.5;
-	cursor.y = -(event.clientY / sizes.height - 0.5);
+window.addEventListener("mousemove", (event) => {
+  cursor.x = event.clientX / sizes.width - 0.5;
+  cursor.y = -(event.clientY / sizes.height - 0.5);
 });
 
 const tl = gsap.timeline();
 setTimeout(() => {
-	// tl.to(text.rotation, {
-	// 	scrollTrigger: {
-	// 		trigger: '.hero-section',
-	// 		scrub: 10,
-	// 		toggleActions: 'play reverse none reverse',
-	// 	},
-	// });
+  // tl.to(text.rotation, {
+  // 	scrollTrigger: {
+  // 		trigger: '.hero-section',
+  // 		scrub: 10,
+  // 		toggleActions: 'play reverse none reverse',
+  // 	},
+  // });
 
-	// TODO - fade text
+  // TODO - fade text
 
-	tl.to(text.position, {
-		z: -300,
-		ease: 'power1.inOut',
-		scrollTrigger: {
-			trigger: '.mobile-section',
-			scrub: 2,
-			toggleActions: 'play reverse none reverse',
-		},
-	});
+  tl.to(text.position, {
+    z: -200,
+    ease: "power1.inOut",
+    scrollTrigger: {
+      trigger: ".mobile-section",
+      scrub: 2,
+      toggleActions: "play reverse none reverse",
+    },
+  });
 
-	tl.to(phone.position, {
-		x: 1.8,
-		scrollTrigger: {
-			trigger: '.mobile-section',
-			scrub: 2,
-			end: 'top center',
-			toggleActions: 'play reverse reverse reverse',
-			markers: true,
-		},
-	});
+  tl.to(text.rotation, {
+    x: -Math.PI,
+    ease: "power1.inOut",
+    scrollTrigger: {
+      trigger: ".mobile-section",
+      scrub: 2,
+    },
+  });
 
-	// quick fix just for removing the phone when scrolling - needs to reverse out.
+  tl.to(phone.position, {
+    x: 1.8,
+    scrollTrigger: {
+      trigger: ".mobile-section",
+      scrub: 2,
+      end: "top center",
+      toggleActions: "play reverse reverse reverse",
+      // markers: true,
+    },
+  });
 
-	tl.to(phone.position, {
-		x: 20,
-		scrollTrigger: {
-			trigger: '.web-section',
-			scrub: 2,
-		},
-	});
+  // quick fix just for removing the phone when scrolling - needs to reverse out.
 
-	tl.to(phone.rotation, {
-		y: Math.PI * 2.67,
-		scrollTrigger: {
-			trigger: '.mobile-section',
-			scrub: 2,
-			toggleActions: 'play reverse none reverse',
-		},
-	});
+  tl.to(phone.position, {
+    // x: 10,
+    y: 7,
+    scrollTrigger: {
+      trigger: ".web-section",
+      toggleActions: "play reverse none reverse",
+      scrub: 2,
+    },
+  });
 
-	tl.to(laptop.position, {
-		x: 0,
-		y: -2,
-		scrollTrigger: {
-			trigger: '.web-section',
-			scrub: 1,
-		},
-	});
+  tl.to(phone.rotation, {
+    y: Math.PI * 2.67,
+    scrollTrigger: {
+      trigger: ".mobile-section",
+      scrub: 2,
+      toggleActions: "play reverse none reverse",
+    },
+  });
 
-	tl.to(laptop.rotation, {
-		y: 1,
-		x: 0.2,
-		scrollTrigger: {
-			trigger: '.web-section',
-			scrub: 1,
-		},
-	});
+  tl.to(laptop.position, {
+    x: 0,
+    y: -2,
+    scrollTrigger: {
+      trigger: ".web-section",
+      scrub: 1,
+    },
+  });
+
+  tl.to(laptop.rotation, {
+    y: 1,
+    x: 0.2,
+    scrollTrigger: {
+      trigger: ".web-section",
+      scrub: 1,
+    },
+  });
 }, 500);
 
 // gsap.to('.text', {
@@ -243,12 +254,12 @@ setTimeout(() => {
 // 	},
 // });
 const tick = () => {
-	const elapsedTime = clock.getElapsedTime();
-	// Render
-	renderer.render(scene, camera);
+  const elapsedTime = clock.getElapsedTime();
+  // Render
+  renderer.render(scene, camera);
 
-	// Call tick again on the next frame
-	window.requestAnimationFrame(tick);
+  // Call tick again on the next frame
+  window.requestAnimationFrame(tick);
 };
 
 tick();
